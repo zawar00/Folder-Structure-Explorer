@@ -1,0 +1,147 @@
+{
+  "name": "folder-structure-explorer",
+  "displayName": "Folder Structure Explorer",
+  "description": "View, copy, and export your project's folder structure as an interactive tree",
+  "version": "1.0.0",
+  "publisher": "Zawar Ahmad",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zawar00/Folder-Structure-Explorer"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "folder",
+    "structure",
+    "tree",
+    "explorer",
+    "file"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "folderStructureContainer",
+          "title": "Folder Structure",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "folderStructureContainer": [
+        {
+          "id": "folderStructureExplorer",
+          "name": "Explorer"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "folderStructure.refresh",
+        "title": "Folder Structure: Refresh",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "folderStructure.copyToClipboard",
+        "title": "Folder Structure: Copy to Clipboard",
+        "icon": "$(clippy)"
+      },
+      {
+        "command": "folderStructure.openInEditor",
+        "title": "Folder Structure: Open in Editor",
+        "icon": "$(file-text)"
+      },
+      {
+        "command": "folderStructure.expandAll",
+        "title": "Folder Structure: Expand All",
+        "icon": "$(expand-all)"
+      },
+      {
+        "command": "folderStructure.saveAsMarkdown",
+        "title": "Folder Structure: Save as Markdown",
+        "icon": "$(save)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "folderStructure.refresh",
+          "when": "view == folderStructureExplorer",
+          "group": "navigation@5"
+        },
+        {
+          "command": "folderStructure.copyToClipboard",
+          "when": "view == folderStructureExplorer",
+          "group": "navigation@4"
+        },
+        {
+          "command": "folderStructure.openInEditor",
+          "when": "view == folderStructureExplorer",
+          "group": "navigation@3"
+        },
+        {
+          "command": "folderStructure.expandAll",
+          "when": "view == folderStructureExplorer",
+          "group": "navigation@2"
+        },
+        {
+          "command": "folderStructure.saveAsMarkdown",
+          "when": "view == folderStructureExplorer",
+          "group": "navigation@1"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Folder Structure Explorer",
+      "properties": {
+        "folderStructure.exclude.nodeModules": {
+          "type": "boolean",
+          "default": true,
+          "description": "Exclude node_modules folders from the structure"
+        },
+        "folderStructure.exclude.gitFolder": {
+          "type": "boolean",
+          "default": true,
+          "description": "Exclude the .git folder from the structure"
+        },
+        "folderStructure.exclude.respectGitignore": {
+          "type": "boolean",
+          "default": true,
+          "description": "Respect .gitignore rules when building the structure"
+        },
+        "folderStructure.exclude.hiddenFiles": {
+          "type": "boolean",
+          "default": false,
+          "description": "Exclude hidden files and folders (names starting with a dot)"
+        },
+        "folderStructure.exclude.customPatterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "Custom glob patterns to exclude (e.g. [\"dist\", \"*.log\", \"build\"])"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.41",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  }
+}
