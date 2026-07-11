@@ -41,6 +41,13 @@ export function shouldExclude(
     if (config.excludeHiddenFiles && name.startsWith('.')) {
         return true;
     }
+    if (config.excludeDependencyFolders) {
+        for (const folder of config.dependencyFoldersList) {
+            if (name === folder) {
+                return true;
+            }
+        }
+    }
     for (const pattern of config.customExcludePatterns) {
         if (matchesPattern(name, pattern)) {
             return true;

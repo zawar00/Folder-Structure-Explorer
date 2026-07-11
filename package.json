@@ -2,7 +2,7 @@
   "name": "folder-structure-explorer",
   "displayName": "Folder Structure Explorer",
   "description": "View, copy, and export your project's folder structure as an interactive tree",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "zawar00",
   "license": "MIT",
   "repository": {
@@ -40,7 +40,8 @@
       "folderStructureContainer": [
         {
           "id": "folderStructureExplorer",
-          "name": "Explorer"
+          "name": "Explorer",
+          "icon": "media/icon.svg"
         }
       ]
     },
@@ -130,6 +131,39 @@
           },
           "default": [],
           "description": "Custom glob patterns to exclude (e.g. [\"dist\", \"*.log\", \"build\"])"
+        },
+        "folderStructure.exclude.dependencyFolders": {
+          "type": "boolean",
+          "default": true,
+          "description": "Exclude common dependency/vendor folders (vendor, venv, bower_components, etc.)"
+        },
+        "folderStructure.exclude.dependencyFoldersList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "node_modules",
+            "bower_components",
+            "jspm_packages",
+            "vendor",
+            "vendors",
+            "venv",
+            ".venv",
+            "env",
+            "__pycache__",
+            ".tox",
+            "site-packages",
+            ".gradle",
+            ".mvn",
+            "packages",
+            ".nuget",
+            ".cache",
+            ".parcel-cache",
+            ".turbo",
+            ".nx"
+          ],
+          "description": "List of dependency/vendor folder names to exclude when 'dependencyFolders' is enabled. Edit to add or remove entries."
         }
       }
     }
